@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meraki Smoke Shop</title>
+  <meta name="description" content="Premium hookah, flavours and smoking accessories in Bangalore. Visit Meraki Smoke Shop for quality products, great service and a trusted local experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-soft: #111111;
+      --card: rgba(255,255,255,0.05);
+      --card-border: rgba(255,255,255,0.10);
+      --text: #f5f1e8;
+      --muted: #b7b1a7;
+      --gold: #b68d40;
+      --gold-soft: rgba(182, 141, 64, 0.18);
+      --shadow: 0 18px 60px rgba(0,0,0,0.45);
+      --radius: 24px;
+      --container: 1200px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top right, rgba(182,141,64,0.12), transparent 22%),
+                  radial-gradient(circle at left center, rgba(182,141,64,0.08), transparent 25%),
+                  linear-gradient(180deg, #090909 0%, #0f0f0f 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      opacity: 0.035;
+      z-index: -2;
+      filter: grayscale(100%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.88));
+      z-index: -1;
+    }
+
+    .container {
+      width: min(var(--container), 92%);
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(16px);
+      background: rgba(10,10,10,0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .brand span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.96rem;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 600;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #c69a48, #8c6b2f);
+      color: #111;
+      box-shadow: 0 10px 30px rgba(182,141,64,0.28);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .btn-outline {
+      border-color: rgba(255,255,255,0.16);
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: var(--gold-soft);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 60px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--gold);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      line-height: 0.95;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.9;
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card, .glass-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 22px;
+    }
+
+    .stat-card h3 {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .stat-card p { margin: 0; font-size: 0.92rem; line-height: 1.5; }
+
+    .hero-card {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      border-radius: 22px;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .floating-badge {
+      position: absolute;
+      left: 34px;
+      bottom: 34px;
+      background: rgba(10,10,10,0.84);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      padding: 18px 20px;
+      max-width: 270px;
+      backdrop-filter: blur(16px);
+    }
+
+    .floating-badge strong {
+      display: block;
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-size: 1.1rem;
+    }
+
+    section {
+      padding: 110px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .section-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      margin-bottom: 10px;
+    }
+
+    .section-head p {
+      max-width: 680px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .feature-grid, .catalog-grid, .review-grid, .info-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .feature-card, .catalog-card, .review-card, .info-card {
+      padding: 28px;
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(182,141,64,0.22), rgba(182,141,64,0.08));
+      border: 1px solid rgba(182,141,64,0.18);
+      font-size: 1.4rem;
+    }
+
+    .feature-card h3, .catalog-card h3, .review-card h3, .info-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .feature-card p, .catalog-card p, .review-card p, .info-card p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.96rem;
+    }
+
+    .catalog-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .catalog-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .review-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stars {
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+      font-size: 1rem;
+    }
+
+    .review-card .name {
+      margin-top: 18px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .review-card .tag {
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 18px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.4s ease;
+    }
+
+    .gallery-grid img:hover { transform: scale(1.03); }
+
+    .gallery-grid .tall { grid-row: span 2; }
+
+    .info-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .map-box iframe {
+      width: 100%;
+      min-height: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 24px;
+      filter: grayscale(1) contrast(1.1) brightness(0.9);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 18px;
+      margin: 28px 0;
+    }
+
+    .contact-item {
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .contact-item small {
+      color: var(--gold);
+      display: block;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-size: 0.76rem;
+    }
+
+    .footer {
+      padding: 34px 0 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .feature-grid, .catalog-grid, .review-grid, .info-grid, .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .gallery-grid .tall { grid-row: auto; }
+      .hero-card img { height: 420px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { min-height: auto; padding-top: 40px; }
+      .hero-grid, .feature-grid, .catalog-grid, .review-grid, .info-grid, .gallery-grid, .stats {
+        grid-template-columns: 1fr;
+      }
+      .section-head { flex-direction: column; align-items: start; }
+      .hero h1 { line-height: 1.02; }
+      section { padding: 80px 0; }
+      .hero-card img { height: 360px; }
+      .floating-badge {
+        position: static;
+        margin-top: 18px;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <div class="brand">Meraki <span>Smoke</span></div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#catalog">Collection</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#visit">Visit Us</a></li>
+      </ul>
+      <a class="btn btn-primary" href="tel:08197513412">Call Now</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="fade-up">
+        <div class="eyebrow">★ 4.9 Rated by 206 Customers</div>
+        <h1>Premium Hookah & Smoke Accessories with a Luxury Store Experience</h1>
+        <p>Meraki Smoke Shop brings together quality, variety and service in one premium destination. Explore trusted products, stylish accessories and a customer-first experience built for true enthusiasts.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://maps.google.com/?q=18+Sai+Baba+Temple+Rd" target="_blank">Get Directions</a>
+          <a class="btn btn-outline" href="tel:08197513412">Call Store</a>
+          <a class="btn btn-outline" href="https://wa.me/918197513412" target="_blank">WhatsApp</a>
+        </div>
+        <div class="stats">
+          <div class="stat-card glass-card">
+            <h3>206+</h3>
+            <p>Happy customer reviews built on trust and service.</p>
+          </div>
+          <div class="stat-card glass-card">
+            <h3>4.9★</h3>
+            <p>Highly rated local smoke shop with loyal repeat customers.</p>
+          </div>
+          <div class="stat-card glass-card">
+            <h3>12 AM</h3>
+            <p>Open late for convenience when you need it most.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card glass-card fade-up">
+        <img src="https://images.unsplash.com/photo-1525268323446-0505b6fe7778?auto=format&fit=crop&w=1200&q=80" alt="Premium smoke shop ambience" />
+        <div class="floating-badge">
+          <strong>Original Products. Great Service.</strong>
+          <p>In-store shopping, pickup and delivery designed around convenience and quality.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head fade-up">
+        <div>
+          <h2>Built for Quality. Known for Trust.</h2>
+          <p>Meraki Smoke Shop is more than a local store — it’s a curated retail experience for customers who value authentic products, fair pricing and a premium atmosphere.</p>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card glass-card fade-up"><div class="icon">♛</div><h3>Premium Collection</h3><p>A carefully selected range of hookah essentials, flavours and smoking accessories.</p></div>
+        <div class="feature-card glass-card fade-up"><div class="icon">✓</div><h3>Original Products</h3><p>Trusted quality and product authenticity that keeps customers coming back.</p></div>
+        <div class="feature-card glass-card fade-up"><div class="icon">₹</div><h3>Fair Pricing</h3><p>Strong value across categories without compromising on quality and presentation.</p></div>
+        <div class="feature-card glass-card fade-up"><div class="icon">♥</div><h3>Friendly Service</h3><p>Known for customer handling, guidance and a welcoming in-store experience.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog">
+    <div class="container">
+      <div class="section-head fade-up">
+        <div>
+          <h2>Signature Collection</h2>
+          <p>Showcase your best categories in a clean premium layout. Replace these with real store product photos for the final client version.</p>
+        </div>
+      </div>
+
+      <div class="catalog-grid">
+        <div class="catalog-card glass-card fade-up"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80" alt="Hookah collection"><h3>Hookah Sets</h3><p>Premium hookah pieces designed for style, durability and smooth sessions.</p></div>
+        <div class="catalog-card glass-card fade-up"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80" alt="Flavours"><h3>Flavours & Essentials</h3><p>A wide range of flavour options and everyday smoking accessories in one place.</p></div>
+        <div class="catalog-card glass-card fade-up"><img src="https://images.unsplash.com/photo-1561530739-1f79c3e786f7?auto=format&fit=crop&w=900&q=80" alt="Accessories"><h3>Accessories</h3><p>Charcoal, hoses, mouth tips, cleaning tools and more for a complete setup.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews">
+    <div class="container">
+      <div class="section-head fade-up">
+        <div>
+          <h2>Loved by Customers</h2>
+          <p>Real trust is built through real customer experiences. These reviews make the website far more powerful than design alone.</p>
+        </div>
+      </div>
+
+      <div class="review-grid">
+        <div class="review-card glass-card fade-up"><div class="stars">★★★★★</div><p>“This is a great shop with a good selection and a very friendly staff.”</p><div class="name">Hafeez Appi</div><div class="tag">Customer Review</div></div>
+        <div class="review-card glass-card fade-up"><div class="stars">★★★★★</div><p>“Best price and good service.”</p><div class="name">Najmu Mndyr</div><div class="tag">Customer Review</div></div>
+        <div class="review-card glass-card fade-up"><div class="stars">★★★★★</div><p>“Excellent place for hookah lovers.”</p><div class="name">Sooraj Acharya</div><div class="tag">Customer Review</div></div>
+        <div class="review-card glass-card fade-up"><div class="stars">★★★★★</div><p>“Original products.”</p><div class="name">Sainath Reddy</div><div class="tag">Customer Review</div></div>
+        <div class="review-card glass-card fade-up"><div class="stars">★★★★★</div><p>“One stop shop for all the needs at very affordable prices.”</p><div class="name">Muzzammil Pasha</div><div class="tag">Customer Review</div></div>
+        <div class="review-card glass-card fade-up"><div class="stars">★★★★★</div><p>“Very good and quality maintaining shop. Everyone must go once.”</p><div class="name">Uk Afnan</div><div class="tag">Customer Review</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="container">
+      <div class="section-head fade-up">
+        <div>
+          <h2>Store Gallery</h2>
+          <p>This section should use the customer’s real store photos for maximum trust and premium feel. Replace the sample images below with actual shop photos.</p>
+        </div>
+      </div>
+
+      <div class="gallery-grid fade-up">
+        <img class="tall" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Store image">
+        <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="Interior image">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" alt="Product image">
+        <img src="https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=900&q=80" alt="Shelf image">
+        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=80" alt="Store vibe">
+      </div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="container info-grid">
+      <div class="info-card glass-card fade-up">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.6rem); margin-bottom: 16px;">Visit Meraki Smoke Shop</h2>
+        <p>Make it easy for customers to find, call and visit the store. This is where the website turns traffic into real walk-ins and calls.</p>
+
+        <div class="contact-list">
+          <div class="contact-item"><small>Address</small><p>18, Sai Baba Temple Rd</p></div>
+          <div class="contact-item"><small>Phone</small><p>081975 13412</p></div>
+          <div class="contact-item"><small>Store Hours</small><p>Open · Closes 12:00 AM</p></div>
+          <div class="contact-item"><small>Services</small><p>In-store Shopping · In-store Pickup · Delivery</p></div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://maps.google.com/?q=18+Sai+Baba+Temple+Rd" target="_blank">Open Map</a>
+          <a class="btn btn-outline" href="tel:08197513412">Call Store</a>
+        </div>
+      </div>
+
+      <div class="map-box fade-up">
+        <iframe src="https://www.google.com/maps?q=18%20Sai%20Baba%20Temple%20Rd&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+      <p>© 2026 Meraki Smoke Shop. Premium local store experience.</p>
+      <p>Designed for trust, style and customer conversion.</p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
