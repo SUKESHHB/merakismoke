@@ -48,7 +48,7 @@
       content: "";
       position: fixed;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.88));
+      background: linear-gradient(180deg, rgba(99, 104, 46, 0.55), rgba(136, 144, 51, 0.88));
       z-index: -1;
     }
 
@@ -304,6 +304,10 @@
     .catalog-grid {
       grid-template-columns: repeat(3, 1fr);
     }
+    .catalog-grid img:hover{
+      transform: scale(1.11);
+      transition: 1s ease;
+    }
 
     .catalog-card img {
       width: 100%;
@@ -312,6 +316,7 @@
       border-radius: 20px;
       margin-bottom: 22px;
       border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.4s ease;
     }
 
     .review-grid {
@@ -353,7 +358,7 @@
       transition: 0.4s ease;
     }
 
-    .gallery-grid img:hover { transform: scale(1.03); }
+    .gallery-grid img:hover { transform: scale(1.10); }
 
     .gallery-grid .tall { grid-row: span 2; }
 
@@ -411,12 +416,25 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 1100px) {
-      .hero-grid, .feature-grid, .catalog-grid, .review-grid, .info-grid, .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .gallery-grid .tall { grid-row: auto; }
-      .hero-card img { height: 420px; }
+    @media (max-width: 480px) {
+      .container { width: min(100%, 92%); }
+      .hero { padding: 24px 0 54px; }
+      .eyebrow { font-size: 0.8rem; padding: 9px 14px; }
+      .hero h1 { font-size: clamp(2.1rem, 10vw, 3rem); }
+      .hero p { font-size: 0.94rem; }
+      .hero-card img { height: 270px; }
+      .floating-badge { padding: 16px; border-radius: 16px; }
+      .feature-card, .catalog-card, .review-card, .info-card, .stat-card, .hero-card { padding: 16px; }
+      .icon { width: 48px; height: 48px; border-radius: 16px; font-size: 1.2rem; }
+      .catalog-card img { height: 220px; }
+      .gallery-grid img { min-height: 180px; }
+      .lightbox { padding: 10px; }
+      .lightbox img { border-radius: 18px; max-height: 70vh; }
+      .lightbox-nav { width: 46px; height: 46px; font-size: 1.35rem; }
+      .lightbox-prev { left: 8px; }
+      .lightbox-next { right: 8px; }
+      .lightbox-close { width: 44px; height: 44px; font-size: 1.3rem; top: 10px; right: 10px; }
+      .map-box iframe { min-height: 320px; }
     }
 
     @media (max-width: 768px) {
@@ -455,17 +473,17 @@
   <header class="hero">
     <div class="container hero-grid">
       <div class="fade-up">
-        <div class="eyebrow">★ 4.9 Rated by 206 Customers</div>
+        <div class="eyebrow">★ 4.9 Rated by 200+ Customers</div>
         <h1>Premium Hookah & Smoke Accessories with a Luxury Store Experience</h1>
         <p>Meraki Smoke Shop brings together quality, variety and service in one premium destination. Explore trusted products, stylish accessories and a customer-first experience built for true enthusiasts.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="https://maps.google.com/?q=18+Sai+Baba+Temple+Rd" target="_blank">Get Directions</a>
-          <a class="btn btn-outline" href="tel:08197513412">Call Store</a>
-          <a class="btn btn-outline" href="https://wa.me/918197513412" target="_blank">WhatsApp</a>
+          <a class="btn btn-primary" href="tel:08197513412">Call Store</a>
+          <a class="btn btn-primary" href="https://wa.me/918197513412" target="_blank">WhatsApp</a>
         </div>
         <div class="stats">
           <div class="stat-card glass-card">
-            <h3>206+</h3>
+            <h3>200+</h3>
             <p>Happy customer reviews built on trust and service.</p>
           </div>
           <div class="stat-card glass-card">
@@ -473,14 +491,14 @@
             <p>Highly rated local smoke shop with loyal repeat customers.</p>
           </div>
           <div class="stat-card glass-card">
-            <h3>12 AM</h3>
+            <h3>10AM - 12AM</h3>
             <p>Open late for convenience when you need it most.</p>
           </div>
         </div>
       </div>
 
       <div class="hero-card glass-card fade-up">
-        <img src="https://images.unsplash.com/photo-1525268323446-0505b6fe7778?auto=format&fit=crop&w=1200&q=80" alt="Premium smoke shop ambience" />
+        <img src="smoke4.jpg" />
         <div class="floating-badge">
           <strong>Original Products. Great Service.</strong>
           <p>In-store shopping, pickup and delivery designed around convenience and quality.</p>
@@ -517,9 +535,9 @@
       </div>
 
       <div class="catalog-grid">
-        <div class="catalog-card glass-card fade-up"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80" alt="Hookah collection"><h3>Hookah Sets</h3><p>Premium hookah pieces designed for style, durability and smooth sessions.</p></div>
-        <div class="catalog-card glass-card fade-up"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80" alt="Flavours"><h3>Flavours & Essentials</h3><p>A wide range of flavour options and everyday smoking accessories in one place.</p></div>
-        <div class="catalog-card glass-card fade-up"><img src="https://images.unsplash.com/photo-1561530739-1f79c3e786f7?auto=format&fit=crop&w=900&q=80" alt="Accessories"><h3>Accessories</h3><p>Charcoal, hoses, mouth tips, cleaning tools and more for a complete setup.</p></div>
+        <div class="catalog-card glass-card fade-up"><img src="smoke3.jpg " alt="Hookah collection"><h3>Hookah Sets</h3><p>Premium hookah pieces designed for style, durability and smooth sessions.</p></div>
+        <div class="catalog-card glass-card fade-up"><img src="smoke1.jpg" alt="Flavours"><h3>Flavours & Essentials</h3><p>A wide range of flavour options and everyday smoking accessories in one place.</p></div>
+        <div class="catalog-card glass-card fade-up"><img src="smoke2.jpg" alt="Accessories"><h3>Accessories</h3><p>Charcoal, hoses, mouth tips, cleaning tools and more for a complete setup.</p></div>
       </div>
     </div>
   </section>
@@ -554,11 +572,11 @@
       </div>
 
       <div class="gallery-grid fade-up">
-        <img class="tall" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Store image">
-        <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80" alt="Interior image">
-        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" alt="Product image">
-        <img src="https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=900&q=80" alt="Shelf image">
-        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=900&q=80" alt="Store vibe">
+        <img class=" " src="smoke6.jpg" alt="Store image">
+        <img class="tall" src="smoke5.jpg" alt="Interior image">
+        <img src="smoke2.jpg" alt="Product image">
+        <img src="smoke3.jpg" alt="Shelf image">
+        <img src="smoke1.jpg" alt="Store vibe">
       </div>
     </div>
   </section>
@@ -570,20 +588,20 @@
         <p>Make it easy for customers to find, call and visit the store. This is where the website turns traffic into real walk-ins and calls.</p>
 
         <div class="contact-list">
-          <div class="contact-item"><small>Address</small><p>18, Sai Baba Temple Rd</p></div>
+          <div class="contact-item"><small>Address</small><p>18, Sai Baba Temple Rd, Green Garden Layout, Silver Springs Layout, Munnekolala, Bengaluru, Karnataka 560037</p></div>
           <div class="contact-item"><small>Phone</small><p>081975 13412</p></div>
-          <div class="contact-item"><small>Store Hours</small><p>Open · Closes 12:00 AM</p></div>
+          <div class="contact-item"><small>Store Hours</small><p>10AM - 12AM</p></div>
           <div class="contact-item"><small>Services</small><p>In-store Shopping · In-store Pickup · Delivery</p></div>
         </div>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://maps.google.com/?q=18+Sai+Baba+Temple+Rd" target="_blank">Open Map</a>
+          <a class="btn btn-primary" href="https://www.google.com/maps/place/Meraki+Smoke+shop/@12.9537257,77.7127014,902m/data=!3m3!1e3!4b1!5s0x3bae123922f1511d:0xcfd4256204feed46!4m6!3m5!1s0x3bae13bf18525561:0xb6ddb239d3ed9679!8m2!3d12.9537257!4d77.7152763!16s%2Fg%2F11r43jywsv?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D" target="_blank">Open Map</a>
           <a class="btn btn-outline" href="tel:08197513412">Call Store</a>
         </div>
       </div>
 
       <div class="map-box fade-up">
-        <iframe src="https://www.google.com/maps?q=18%20Sai%20Baba%20Temple%20Rd&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps?q=12.9537257,77.7152763&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </section>
